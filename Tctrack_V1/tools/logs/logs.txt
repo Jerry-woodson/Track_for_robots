@@ -1,0 +1,222 @@
+[2023-11-17 14:43:53,637-rk0-train_tctrack.py#229] Version Information: 
+commit : 
+  log  : 
+
+[2023-11-17 14:43:53,638-rk0-train_tctrack.py#230] config 
+{
+    "META_ARC": "TCTrack_alexnet",
+    "CUDA": true,
+    "TRAIN": {
+        "THR_HIGH": 0.6,
+        "apnchannel": 256,
+        "clsandlocchannel": 256,
+        "groupchannel": 32,
+        "THR_LOW": 0.3,
+        "NEG_NUM": 16,
+        "POS_NUM": 16,
+        "TOTAL_NUM": 64,
+        "PR": 1,
+        "CLS_WEIGHT": 1.2,
+        "LOC_WEIGHT": 3.0,
+        "SHAPE_WEIGHT": 2.0,
+        "EXEMPLAR_SIZE": 127,
+        "SEARCH_SIZE": 287,
+        "BASE_SIZE": 8,
+        "OUTPUT_SIZE": 11,
+        "RESUME": "",
+        "PRETRAINED": 0,
+        "LARGER": 1.0,
+        "LOG_DIR": "./logs",
+        "SNAPSHOT_DIR": "./snapshot",
+        "EPOCH": 100,
+        "START_EPOCH": 0,
+        "BATCH_SIZE": 140,
+        "videorange": 3,
+        "NUM_GPU": 2,
+        "NUM_WORKERS": 8,
+        "MOMENTUM": 0.9,
+        "WEIGHT_DECAY": 0.0001,
+        "w1": 1.0,
+        "w2": 1.0,
+        "w3": 1.0,
+        "videorangemax": 3,
+        "w4": 1.0,
+        "w5": 1.0,
+        "range": 1.0,
+        "MASK_WEIGHT": 1,
+        "PRINT_FREQ": 20,
+        "LOG_GRADS": false,
+        "GRAD_CLIP": 10.0,
+        "BASE_LR": 0.005,
+        "LR": {
+            "TYPE": "log",
+            "KWARGS": {
+                "start_lr": 0.01,
+                "end_lr": 5e-05
+            }
+        },
+        "LR_WARMUP": {
+            "WARMUP": true,
+            "TYPE": "step",
+            "EPOCH": 5,
+            "KWARGS": {
+                "start_lr": 0.005,
+                "end_lr": 0.01,
+                "step": 1
+            }
+        }
+    },
+    "DATASET": {
+        "TEMPLATE": {
+            "SHIFT": 4,
+            "SCALE": 0.05,
+            "BLUR": 0.0,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "SEARCH": {
+            "SHIFT": 64,
+            "SCALE": 0.18,
+            "BLUR": 0.2,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "NEG": 0.0,
+        "GRAY": 0.0,
+        "NAMES": [
+            "VID",
+            "GOT",
+            "LaSOT"
+        ],
+        "VID": {
+            "ROOT": "./train_dataset/vid/crop511",
+            "ANNO": "./train_dataset/vid/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "YOUTUBEBB": {
+            "ROOT": "./train_dataset/yt_bb/crop511",
+            "ANNO": "./train_dataset/yt_bb/train.json",
+            "FRAME_RANGE": 3,
+            "NUM_USE": -1
+        },
+        "COCO": {
+            "ROOT": "./train_dataset/coco/crop511",
+            "ANNO": "./train_dataset/coco/train2017.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "LaSOT": {
+            "ROOT": "./train_dataset/lasot/crop511",
+            "ANNO": "./train_dataset/lasot/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "GOT": {
+            "ROOT": "./train_dataset/got10k/crop511",
+            "ANNO": "./train_dataset/got10k/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "VIDEOS_PER_EPOCH": 600000
+    },
+    "BACKBONE": {
+        "TYPE": "temporalalexnet",
+        "KWARGS": {},
+        "PRETRAINED": "temporalalexnet.pth",
+        "TRAIN_LAYERS": [
+            "block3",
+            "temporalconv1",
+            "b_f1",
+            "temporalconv2",
+            "b_f2"
+        ],
+        "Tempor_TRAIN_LAYERS": [
+            "block3",
+            "temporalconv1",
+            "b_f1",
+            "temporalconv2",
+            "b_f2"
+        ],
+        "LAYERS_LR": 0.1,
+        "TRAIN_EPOCH": 10
+    },
+    "ANCHOR": {
+        "STRIDE": 16
+    },
+    "TRACK": {
+        "TYPE": "TCTracktracker",
+        "PENALTY_K": 0.0595,
+        "WINDOW_INFLUENCE": 0.43985,
+        "LR": 0.3148,
+        "w1": 1.2,
+        "w2": 1.0,
+        "w3": 1.0,
+        "LARGER": 1.4,
+        "EXEMPLAR_SIZE": 127,
+        "INSTANCE_SIZE": 287,
+        "BASE_SIZE": 8,
+        "STRIDE": 8,
+        "strict": 0.5,
+        "CONTEXT_AMOUNT": 0.5,
+        "LOST_INSTANCE_SIZE": 831,
+        "CONFIDENCE_LOW": 0.85,
+        "CONFIDENCE_HIGH": 0.998,
+        "MASK_THERSHOLD": 0.3,
+        "MASK_OUTPUT_SIZE": 127
+    },
+    "HP_SEARCH_TCTrackpp_online": {
+        "OTB100": [
+            0.142035,
+            0.404,
+            0.29948
+        ],
+        "GOT10K": [
+            0.04,
+            0.44,
+            0.33
+        ],
+        "UAV123": [
+            0.04,
+            0.44,
+            0.33
+        ],
+        "LaSOT": [
+            0.05,
+            0.44,
+            0.32
+        ]
+    },
+    "HP_SEARCH_TCTrackpp_offline": {
+        "OTB100": [
+            0.142035,
+            0.404,
+            0.29948
+        ],
+        "UAV123_10fps": [
+            0.0385143,
+            0.436205,
+            0.328106
+        ],
+        "UAVTrack112": [
+            0.0579,
+            0.436,
+            0.323723
+        ],
+        "DTB70": [
+            0.0346,
+            0.441,
+            0.328
+        ],
+        "Visdrone2018": [
+            0.058,
+            0.437,
+            0.3235
+        ]
+    }
+}
+[2023-11-17 14:43:56,612-rk0-model_load.py# 48] load pretrained model from /home/xiangfuli96/tctrack/tools/../pretrained_models/temporalalexnet.pth
+[2023-11-17 14:43:56,786-rk0-model_load.py# 42] remove prefix 'module.'
+[2023-11-17 14:43:56,787-rk0-model_load.py# 33] used keys:43
+[2023-11-17 14:43:56,817-rk0-train_tctrack.py# 61] build train dataset
+[2023-11-17 14:43:56,817-rk0-dataset.py# 42] loading VID
